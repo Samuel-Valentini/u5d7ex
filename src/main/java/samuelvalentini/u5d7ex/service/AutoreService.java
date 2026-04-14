@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import samuelvalentini.u5d7ex.Autore;
 import samuelvalentini.u5d7ex.exception.NotFoundException;
 import samuelvalentini.u5d7ex.playload.AutorePlayload;
+import samuelvalentini.u5d7ex.playload.UpdateAutorePlayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,5 +53,24 @@ public class AutoreService {
         String cognome = found.getCognome();
         this.autoreDB.remove(found);
         log.info("Autore {} {} rimosso", nome, cognome);
+    }
+
+    public Autore findByIdAndUpdate(long autoreId, UpdateAutorePlayload updateAutorePlayload) {
+        Autore found = null;
+        for (Autore autore : autoreDB) {
+            if (autore.getId() == autoreId) {
+                found = autore;
+                break;
+            }
+        }
+
+        if (found == null) throw new NotFoundException(String.valueOf(autoreId));
+
+        found.setNome(updateAutorePlayload.getNome());
+        found.setCognome(updateAutorePlayload.getCognome());
+        found.setEmail(updateAutorePlayload.getEmail());
+        found.setDataDiNascita(updateAutorePlayload.getDataDiNascita());
+        found.setAvatar(updateAutorePlayload.getAvatar());
+        return found;
     }
 }
