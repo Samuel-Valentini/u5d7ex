@@ -24,8 +24,8 @@ public class BlogService {
         for (Blog blog : blogsDB) {
             if (blog.getId() == blogId) {
                 found = blog;
+                break;
             }
-            ;
         }
         if (found == null) throw new NotFoundException(String.valueOf(blogId));
         return found;
@@ -47,6 +47,7 @@ public class BlogService {
                 found.setContenuto(updateBlogPlayload.getContenuto());
                 found.setCover(updateBlogPlayload.getCover());
                 found.setTempoDiLettura(updateBlogPlayload.getTempoDiLettura());
+                break;
             }
 
         }
@@ -59,8 +60,8 @@ public class BlogService {
         for (Blog blog : blogsDB) {
             if (blog.getId() == blogId) {
                 found = blog;
+                break;
             }
-            ;
         }
         if (found == null) throw new NotFoundException(String.valueOf(blogId));
         this.blogsDB.remove(found);

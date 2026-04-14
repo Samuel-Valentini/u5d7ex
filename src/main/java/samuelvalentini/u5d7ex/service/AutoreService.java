@@ -31,6 +31,7 @@ public class AutoreService {
         for (Autore autore : autoreDB) {
             if (autore.getId() == autoreId) {
                 found = autore;
+                break;
             }
         }
 
