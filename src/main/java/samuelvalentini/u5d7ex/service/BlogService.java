@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import samuelvalentini.u5d7ex.Blog;
 import samuelvalentini.u5d7ex.exception.NotFoundException;
 import samuelvalentini.u5d7ex.playload.BlogPlayload;
+import samuelvalentini.u5d7ex.playload.UpdateBlogPlayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,5 +35,22 @@ public class BlogService {
         Blog blog = new Blog(blogPlayload.getCategoria(), blogPlayload.getTitolo(), blogPlayload.getContenuto());
         this.blogsDB.add(blog);
         return blog;
+    }
+
+    public Blog findByIdAndUpdate(long blogId, UpdateBlogPlayload updateBlogPlayload) {
+        Blog found = null;
+        for (Blog blog : blogsDB) {
+            if (blog.getId() == blogId) {
+                found = blog;
+                found.setCategoria(updateBlogPlayload.getCategoria());
+                found.setTitolo(updateBlogPlayload.getTitolo());
+                found.setContenuto(updateBlogPlayload.getContenuto());
+                found.setCover(updateBlogPlayload.getCover());
+                found.setTempoDiLettura(updateBlogPlayload.getTempoDiLettura());
+            }
+
+        }
+        if (found == null) throw new NotFoundException(String.valueOf(blogId));
+        return found;
     }
 }
