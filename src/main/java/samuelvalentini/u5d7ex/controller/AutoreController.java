@@ -30,7 +30,8 @@ public class AutoreController {
     }
 
     @PostMapping
-    public Autore createNewAutore(AutorePlayload autorePlayload) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Autore createNewAutore(@RequestBody AutorePlayload autorePlayload) {
         return autoreService.saveNewAutore(autorePlayload);
     }
 
