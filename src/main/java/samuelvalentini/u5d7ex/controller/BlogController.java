@@ -1,10 +1,9 @@
 package samuelvalentini.u5d7ex.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 import samuelvalentini.u5d7ex.Blog;
+import samuelvalentini.u5d7ex.playload.BlogPlayload;
 import samuelvalentini.u5d7ex.service.BlogService;
 
 import java.util.List;
@@ -24,8 +23,13 @@ public class BlogController {
     }
 
     @GetMapping("/{blogId}")
-    public Blog getBlogById (@PathVariable long blogId){
+    public Blog getBlogById(@PathVariable long blogId) {
         return this.blogService.findById(blogId);
     }
 
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Blog createNewBlog(@RequestBody BlogPlayload blogPlayload) {
+        return this.blogService.saveNewBlog(blogPlayload);
+    }
 }
