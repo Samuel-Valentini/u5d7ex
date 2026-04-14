@@ -1,6 +1,7 @@
 package samuelvalentini.u5d7ex.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import samuelvalentini.u5d7ex.Blog;
@@ -20,6 +21,11 @@ public class BlogController {
     @GetMapping
     public List<Blog> findAll() {
         return this.blogService.findAll();
+    }
+
+    @GetMapping("/{blogId}")
+    public Blog getBlogById (@PathVariable long blogId){
+        return this.blogService.findById(blogId);
     }
 
 }
