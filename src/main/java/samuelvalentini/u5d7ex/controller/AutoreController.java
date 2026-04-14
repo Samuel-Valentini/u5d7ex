@@ -1,5 +1,6 @@
 package samuelvalentini.u5d7ex.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import samuelvalentini.u5d7ex.Autore;
 import samuelvalentini.u5d7ex.playload.AutorePlayload;
@@ -30,6 +31,12 @@ public class AutoreController {
     @PostMapping
     public Autore createNewAutore(AutorePlayload autorePlayload) {
         return autoreService.saveNewAutore(autorePlayload);
+    }
+
+    @DeleteMapping("/{autoreId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAutore(@PathVariable long autoreId) {
+        autoreService.deleteAutore(autoreId);
     }
 
 }
