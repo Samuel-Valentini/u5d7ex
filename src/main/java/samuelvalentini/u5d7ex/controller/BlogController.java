@@ -38,4 +38,10 @@ public class BlogController {
     public Blog updateBlog(@PathVariable long blogId, @RequestBody UpdateBlogPlayload updateBlogPlayload) {
         return this.blogService.findByIdAndUpdate(blogId, updateBlogPlayload);
     }
+
+    @DeleteMapping("/{blogId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBlog(@PathVariable long blogId) {
+        this.blogService.deleteBlog(blogId);
+    }
 }

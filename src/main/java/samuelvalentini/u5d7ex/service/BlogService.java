@@ -53,4 +53,17 @@ public class BlogService {
         if (found == null) throw new NotFoundException(String.valueOf(blogId));
         return found;
     }
+
+    public void deleteBlog(long blogId) {
+        Blog found = null;
+        for (Blog blog : blogsDB) {
+            if (blog.getId() == blogId) {
+                found = blog;
+            }
+            ;
+        }
+        if (found == null) throw new NotFoundException(String.valueOf(blogId));
+        this.blogsDB.remove(found);
+    }
+
 }
