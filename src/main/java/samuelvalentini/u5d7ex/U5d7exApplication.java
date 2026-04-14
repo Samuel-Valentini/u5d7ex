@@ -4,8 +4,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import samuelvalentini.u5d7ex.enumeration.Categoria;
+import samuelvalentini.u5d7ex.playload.AutorePlayload;
 import samuelvalentini.u5d7ex.playload.BlogPlayload;
+import samuelvalentini.u5d7ex.service.AutoreService;
 import samuelvalentini.u5d7ex.service.BlogService;
+
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class U5d7exApplication {
@@ -20,8 +24,15 @@ public class U5d7exApplication {
         blogService.saveNewBlog(blog1);
         blogService.saveNewBlog(blog2);
         blogService.saveNewBlog(blog3);
-		
 
+        AutorePlayload autore1 = new AutorePlayload("Gino", "Fini", "ciao@ciao.it", LocalDate.now().minusYears(22));
+        AutorePlayload autore2 = new AutorePlayload("Gino2", "Fini2", "ciao@ciao.it", LocalDate.now().minusYears(32));
+        AutorePlayload autore3 = new AutorePlayload("Gino3", "Fini3", "ciao@ciao.it", LocalDate.now().minusYears(42));
+
+        AutoreService autoreService = ctx.getBean(AutoreService.class);
+        autoreService.saveNewAutore(autore1);
+        autoreService.saveNewAutore(autore2);
+        autoreService.saveNewAutore(autore3);
     }
 
 }
